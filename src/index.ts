@@ -79,7 +79,7 @@ interface IRepo {
     { label: '🌄 Sunrise', commits: sunrise },
     { label: '🌇 Daytime', commits: daytime },
     { label: '🌆 Evening', commits: evening },
-    { label: '🌃🌉 Overtime', commits: overtime },
+    { label: '🌃 Overtime', commits: overtime },
     { label: '🌌 Night', commits: night },
   ];
 
