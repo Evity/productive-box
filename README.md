@@ -48,3 +48,16 @@ This project uses GitHub graphQL API to get the commit histories and write into 
 1. Add the following environment variables:
    - **GH_TOKEN:** The GitHub token generated above.
 1. [Pin the newly created Gist](https://help.github.com/en/github/setting-up-and-managing-your-github-profile/pinning-items-to-your-profile)
+
+<details align="left">
+<summary>More</summary>
+
+|  Name   | Time  |
+|  ----  | :---:  |
+|Sunrise | 6 - 9|
+|Daytime | 9 - 18|
+|Sunsets |18 - 21|
+|Evening |21 - 24|
+|Night   | 0 - 6|
+
+</details>
