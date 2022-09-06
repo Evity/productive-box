@@ -47,8 +47,8 @@ interface IRepo {
 
   let sunrise = 0; // 6 - 9
   let daytime = 0; // 9 - 18
-  let evening = 0; // 18 - 21
-  let overtime = 0; //21 - 24
+  let sunsets = 0; // 18 - 21
+  let evening = 0; //21 - 24
   let night = 0; // 0 - 6
 
 
@@ -63,8 +63,8 @@ interface IRepo {
        */
       if (hour >= 6 && hour < 9) sunrise++;
       if (hour >= 9 && hour < 18) daytime++;
-      if (hour >= 18 && hour < 21) evening++;
-      if (hour >= 21 && hour < 24) overtime++;
+      if (hour >= 18 && hour < 21) sunsets++;
+      if (hour >= 21 && hour < 24) evening++;
       if (hour >= 0 && hour < 6) night++;
     });
   });
@@ -72,14 +72,14 @@ interface IRepo {
   /**
    * Next, generate diagram
    */
-  const sum = sunrise + daytime + evening + overtime + night;
+  const sum = sunrise + daytime + sunsets + evening + night;
   if (!sum) return;
 
   const oneDay = [
     { label: '🌄 Sunrise', commits: sunrise },
     { label: '🌇 Daytime', commits: daytime },
-    { label: '🌆 Sunsets', commits: evening },
-    { label: '🌃 Evening', commits: overtime },
+    { label: '🌆 Sunsets', commits: sunsets },
+    { label: '🌃 Evening', commits: evening },
     { label: '🌌 Night', commits: night },
   ];
 
@@ -110,7 +110,7 @@ interface IRepo {
     files: {
       [filename]: {
         // eslint-disable-next-line quotes
-        filename: (sunrise + daytime) > (evening + overtime + night) ? "I'm an early 🐤" : "I'm a night 🦉",
+        filename: (sunrise + daytime) > (sunsets + evening + night) ? "I'm an early 🐤" : "I'm a night 🦉",
         content: lines.join('\n'),
       },
     },
