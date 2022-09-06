@@ -45,10 +45,12 @@ interface IRepo {
 
   if (!committedTimeResponseMap) return;
 
-  let morning = 0; // 6 - 12
-  let daytime = 0; // 12 - 18
-  let evening = 0; // 18 - 24
+  let sunrise = 0; // 6 - 9
+  let daytime = 0; // 9 - 18
+  let evening = 0; // 18 - 21
+  let overtime = 0; //21 - 24
   let night = 0; // 0 - 6
+
 
   committedTimeResponseMap.forEach(committedTimeResponse => {
     committedTimeResponse?.data?.repository?.defaultBranchRef?.target?.history?.edges.forEach(edge => {
@@ -59,9 +61,10 @@ interface IRepo {
       /**
        * voting and counting
        */
-      if (hour >= 6 && hour < 12) morning++;
-      if (hour >= 12 && hour < 18) daytime++;
-      if (hour >= 18 && hour < 24) evening++;
+      if (hour >= 6 && hour < 9) sunrise++;
+      if (hour >= 9 && hour < 18) daytime++;
+      if (hour >= 18 && hour < 21) evening++;
+      if (hour >= 21 && hour < 24) overtime++;
       if (hour >= 0 && hour < 6) night++;
     });
   });
@@ -73,10 +76,11 @@ interface IRepo {
   if (!sum) return;
 
   const oneDay = [
-    { label: '🌞 Morning', commits: morning },
-    { label: '🌆 Daytime', commits: daytime },
-    { label: '🌃 Evening', commits: evening },
-    { label: '🌙 Night', commits: night },
+    { label: '🏙 Sunrise', commits: sunrise },
+    { label: '🌇 Daytime', commits: daytime },
+    { label: '🌆 Evening', commits: evening },
+    { label: '🌃 Overtime', commits: overtime },
+    { label: '🌌 Night', commits: night },
   ];
 
   const lines = oneDay.reduce((prev, cur) => {
@@ -106,7 +110,7 @@ interface IRepo {
     files: {
       [filename]: {
         // eslint-disable-next-line quotes
-        filename: (morning + daytime) > (evening + night) ? "I'm an early 🐤" : "I'm a night 🦉",
+        filename: (sunrise + daytime) > (evening + overtime +night) ? "I'm an early 🐤" : "I'm a night 🦉",
         content: lines.join('\n'),
       },
     },
