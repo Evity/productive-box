@@ -72,7 +72,7 @@ interface IRepo {
   /**
    * Next, generate diagram
    */
-  const sum = morning + daytime + evening + night;
+  const sum = sunrise + daytime + evening + overtime + night;
   if (!sum) return;
 
   const oneDay = [
@@ -110,7 +110,7 @@ interface IRepo {
     files: {
       [filename]: {
         // eslint-disable-next-line quotes
-        filename: (sunrise + daytime) > (evening + overtime +night) ? "I'm an early 🐤" : "I'm a night 🦉",
+        filename: (sunrise + daytime) > (evening + overtime + night) ? "I'm an early 🐤" : "I'm a night 🦉",
         content: lines.join('\n'),
       },
     },
